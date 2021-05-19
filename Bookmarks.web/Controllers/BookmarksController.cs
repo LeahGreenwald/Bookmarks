@@ -52,7 +52,7 @@ namespace Bookmarks.web.Controllers
         public List<TopUrl> GetTop5()
         {
             var repo = new BookmarkRepository(_connectionString);
-            return repo.GetTopUrls();
+            return repo.GetTop5();
         }
     }
 }

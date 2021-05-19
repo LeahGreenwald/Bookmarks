@@ -42,10 +42,5 @@ namespace Bookmarks.data
 
            // var TopUrls = ctx.Database.ExecuteSqlInterpolated($"select Url, COUNT(*) as count from Bookmarks group by Url").ToList();
         }
-        public List<TopUrl> GetTopUrls()
-        {
-            var ctx = new BookmarksContext(_connectionString);
-            return ctx.Bookmarks.GroupBy(b => b.Url).OrderByDescending(b => b.Count()).Take(5).Select(b => new TopUrl { Url = b.Key, Count = b.Count() }).ToList();
-        }
     }
 }
