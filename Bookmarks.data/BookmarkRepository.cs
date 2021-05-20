@@ -38,9 +38,12 @@ namespace Bookmarks.data
         public List<TopUrl> GetTop5()
         {
             using var ctx = new BookmarksContext(_connectionString);
-            return ctx.Bookmarks.GroupBy(b => b.Url).OrderByDescending(b => b.Count()).Take(5).Select(b => new TopUrl { Count = b.Count(), Url = b.Key}).ToList(); ;
-
-           // var TopUrls = ctx.Database.ExecuteSqlInterpolated($"select Url, COUNT(*) as count from Bookmarks group by Url").ToList();
-        }
+            return ctx.Bookmarks
+                .GroupBy(b => b.Url)
+                .OrderByDescending(b => b.Count())
+                .Take(5)
+                .Select(b => new TopUrl { Count = b.Count(), Url = b.Key})
+                .ToList();
+           }
     }
 }
