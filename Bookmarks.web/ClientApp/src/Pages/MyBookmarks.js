@@ -34,7 +34,7 @@ const MyBookmarks = () => {
         setTitle(e.target.value);
     };
 
-    const update = async() => {
+    const update = async () => {
         await axios.post(`api/bookmarks/update?title=${title}&&id=${editId}`);
         getMyBookmarks();
         cancel();
@@ -49,15 +49,16 @@ const MyBookmarks = () => {
         return (<tr key={b.id}>
             <td>
                 {editId !== b.id && b.title}
-                {editId === b.id && <input type='text' value={title} onChange={onTitleChange} />}
+                {editId === b.id && <input type='text' value={title} className='form-control' onChange={onTitleChange} />}
             </td>
             <td><a href={b.url} target="_blank">{b.url}</a></td>
             <td>
                 {editId !== b.id && <button className="btn btn-success" onClick={() => editClick(b)}>Edit Title</button>}
-                {editId === b.id && <>
-                    <button className="btn btn-primary" onClick={update}>Update</button>
-                    <button className="btn btn-warning" onClick={cancel}>Cancel</button>
-                </>}
+                {editId === b.id &&
+                    <>
+                        <button className="btn btn-primary" onClick={update}>Update</button>
+                        <button className="btn btn-warning" onClick={cancel}>Cancel</button>
+                    </>}
 
 
                 <button className="btn btn-danger" onClick={() => onDeleteClick(b.id)}>Delete</button>
